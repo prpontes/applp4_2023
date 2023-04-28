@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:galeria_imagem/drawer.dart';
 import 'package:galeria_imagem/tela_grid_imagens.dart';
 import 'package:galeria_imagem/tela_imagem.dart';
 import 'package:galeria_imagem/tela_listagem_imagens.dart';
@@ -33,46 +34,7 @@ class _HomeState extends State<Home> {
     telas = [telaImagem, telaListagemImagens, telaGridImagens];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Galeria de imagens"),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-                child: Column(
-                  children: const [
-                    CircleAvatar(
-                      child: Icon(Icons.account_circle),
-                    ),
-                    ListTile(
-                      title: Text("Nome do usuario"),
-                      subtitle: Text("usuario@usuario.com.br"),
-                    )
-                  ],
-                )
-            ),
-            const ListTile(
-              leading: Icon(Icons.image),
-              title: Text("Galeria"),
-            ),
-            const ListTile(
-              leading: Icon(Icons.account_box),
-              title: Text("Usuário"),
-            ),
-            const Divider(
-              color: Colors.black,
-            ),
-            ListTile(
-              onTap: (){
-                  Navigator.pushReplacementNamed(context, "/");
-              },
-              leading: Icon(Icons.logout),
-              title: Text("Sair"),
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerMenu(),
       body: Center(
         child: telas!.elementAt(barraNavegacaoIndex),
       ),

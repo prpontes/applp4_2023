@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:galeria_imagem/provider_usuario.dart';
+import 'package:provider/provider.dart';
 import 'banco.dart';
 import 'usuario.dart';
 
@@ -17,8 +19,10 @@ class _TelaLoginState extends State<TelaLogin> {
   final TextEditingController controllerLogin = TextEditingController();
   final TextEditingController controllerSenha = TextEditingController();
 
-  void autenticar(login, senha) async{
-    if(await widget.bd!.autenticacao(Usuario(login: login, senha: senha))){
+  void autenticar(context, login, senha) async{
+    Usuario? usr = await widget.bd!.autenticacao(login, senha);
+    if(usr != null){
+      Provider.of<UsuarioProvider>(context, listen: false).usuario = usr;
       Navigator.pushReplacementNamed(context, "/home");
     }else{
       showDialog(
@@ -73,7 +77,7 @@ class _TelaLoginState extends State<TelaLogin> {
                     ),
                     ElevatedButton(
                         onPressed: (){
-                          autenticar(controllerLogin.text, controllerSenha.text);
+                          autenticar(context, controllerLogin.text, controllerSenha.text);
                         },
                         child: Text("Ok")
                     )

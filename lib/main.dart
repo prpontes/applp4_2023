@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:galeria_imagem/provider_usuario.dart';
+import 'package:galeria_imagem/tela_imagem.dart';
 import 'package:galeria_imagem/tela_login.dart';
 import 'package:galeria_imagem/tela_usuario.dart';
+import 'package:provider/provider.dart';
 import 'home.dart';
 import 'banco.dart';
 import 'imagem.dart';
@@ -14,15 +17,21 @@ void main() async{
   await bd.inserirImagem(Imagem(url: "https://www.pontotel.com.br/wp-content/uploads/2022/05/imagem-corporativa.jpg", titulo: "Imagem 2", descricao: "Descrição imagem 2"));
   await bd.inserirImagem(Imagem(url: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg", titulo: "Imagem 3", descricao: "Descrição imagem 3"));
 
-  runApp(MaterialApp(
-    //home: TelaLogin(bd: bd,),
-    debugShowCheckedModeBanner: false,
-    initialRoute: "/",
-    routes: {
-      "/" : (context) => TelaLogin(bd: bd,),
-      "/home" : (context) => Home(bd: bd,),
-      "/telausuario": (context) => TelaUsuario(),
-    },
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => UsuarioProvider()),
+    ],
+    child: MaterialApp(
+      //home: TelaLogin(bd: bd,),
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/",
+      routes: {
+        "/" : (context) => TelaLogin(bd: bd,),
+        "/home" : (context) => Home(bd: bd,),
+        "/telausuario" : (context) => TelaUsuario(),
+        "/telaimagem" : (context) =>TelaImagem(bd: bd,),
+      },
+    ),
   ));
 }
 

@@ -16,8 +16,8 @@ class Banco{
       onCreate: (db, version){
         return db.transaction((txn) async {
           await txn.execute('CREATE TABLE imagem(id INTEGER PRIMARY KEY, url TEXT, titulo TEXT, descricao TEXT)');
-          await txn.execute('CREATE TABLE usuario(id INTEGER PRIMARY KEY, login TEXT, senha TEXT)');
-          await txn.rawInsert('INSERT INTO usuario (login, senha) VALUES (?, ?)', ['paulo', '123456']);
+          await txn.execute('CREATE TABLE usuario(id INTEGER PRIMARY KEY, nome TEXT, email TEXT, avatar TEXT, login TEXT, senha TEXT)');
+          await txn.rawInsert('INSERT INTO usuario (nome, email, login, senha) VALUES (?, ?, ?, ?)', ['Paulo Ricardo', 'paulo.pontes@ifto.edu.br', 'paulo', '123456']);
         });
       },
       version: 1,
@@ -80,16 +80,23 @@ class Banco{
     return img!;
   }
 
-  Future<bool> autenticacao(Usuario usr) async{
+  Future<Usuario?> autenticacao(login, senha) async{
 
     final db = await database;
 
-    List<Map<String, Object?>> map = await db!.query("usuario", where: "login = ? and senha = ?", whereArgs: [usr.login, usr.senha]);
+    List<Map<String, dynamic>> map = await db!.query("usuario", where: "login = ? and senha = ?", whereArgs: [login, senha]);
 
     if(map.isNotEmpty) {
-      return true;
+      return Usuario(
+        id: map[0]['id'],
+        nome: map[0]['nome'],
+        email: map[0]['email'],
+        login: map[0]['login'],
+        senha: map[0]['senha'],
+        avatar: map[0]['avatar'],
+      );
     }else {
-      return false;
+      return null;
     }
   }
 }

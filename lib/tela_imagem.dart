@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'banco.dart';
+import 'drawer.dart';
 import 'imagem.dart';
 import 'imagem_detalhe.dart';
 
@@ -43,6 +44,10 @@ class _TelaImagemState extends State<TelaImagem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Imagem"),
+      ),
+      drawer: DrawerMenu(),
       body: SingleChildScrollView(
         child: Column(
           children: [
