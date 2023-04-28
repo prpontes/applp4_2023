@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:galeria_imagem/tela_login.dart';
+import 'package:galeria_imagem/tela_usuario.dart';
 import 'home.dart';
 import 'banco.dart';
 import 'imagem.dart';
@@ -20,6 +21,7 @@ void main() async{
     routes: {
       "/" : (context) => TelaLogin(bd: bd,),
       "/home" : (context) => Home(bd: bd,),
+      "/telausuario": (context) => TelaUsuario(),
     },
   ));
 }

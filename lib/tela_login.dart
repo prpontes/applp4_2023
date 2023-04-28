@@ -20,9 +20,7 @@ class _TelaLoginState extends State<TelaLogin> {
   void autenticar(login, senha) async{
     if(await widget.bd!.autenticacao(Usuario(login: login, senha: senha))){
       Navigator.pushReplacementNamed(context, "/home");
-      print("Usuário autenticado");
     }else{
-      print("Usuário não encontrado");
       showDialog(
           context: context,
           builder: (context){

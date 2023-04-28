@@ -43,55 +43,57 @@ class _TelaImagemState extends State<TelaImagem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          GestureDetector(
-              onTap: () async {
-                final id = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ImagemDetalhe(img: limg[cont], bd: widget.bd,)
-                    )
-                );
-                if(id != null){
-                  widget.bd!.removerImagem(id);
-                }
-                carregarImagens();
-              },
-              child: limg.isEmpty ? Text("carregando") : Image.network(limg[cont].url)
-          ),
-          limg.isEmpty ? Text("carregando") : Text(limg[cont].titulo,
-            style: TextStyle(
-                fontSize: 18
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            GestureDetector(
+                onTap: () async {
+                  final id = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ImagemDetalhe(img: limg[cont], bd: widget.bd,)
+                      )
+                  );
+                  if(id != null){
+                    widget.bd!.removerImagem(id);
+                  }
+                  carregarImagens();
+                },
+                child: limg.isEmpty ? Text("carregando") : Image.network(limg[cont].url)
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: (){
-                    setState((){
-                      if(cont > 0) {
-                        cont = cont - 1;
-                      }
-                    });
-                  },
-                  child: Text("<<")
+            limg.isEmpty ? Text("carregando") : Text(limg[cont].titulo,
+              style: TextStyle(
+                  fontSize: 18
               ),
-              SizedBox(width: 25,),
-              ElevatedButton(
-                  onPressed: (){
-                    setState((){
-                      if(cont < limg.length-1) {
-                        cont = cont + 1;
-                      }
-                    });
-                  },
-                  child: Text(">>")
-              ),
-            ],
-          )
-        ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: (){
+                      setState((){
+                        if(cont > 0) {
+                          cont = cont - 1;
+                        }
+                      });
+                    },
+                    child: Text("<<")
+                ),
+                SizedBox(width: 25,),
+                ElevatedButton(
+                    onPressed: (){
+                      setState((){
+                        if(cont < limg.length-1) {
+                          cont = cont + 1;
+                        }
+                      });
+                    },
+                    child: Text(">>")
+                ),
+              ],
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
