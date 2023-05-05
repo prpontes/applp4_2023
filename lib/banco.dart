@@ -17,7 +17,7 @@ class Banco{
         return db.transaction((txn) async {
           await txn.execute('CREATE TABLE imagem(id INTEGER PRIMARY KEY, url TEXT, titulo TEXT, descricao TEXT)');
           await txn.execute('CREATE TABLE usuario(id INTEGER PRIMARY KEY, nome TEXT, email TEXT, avatar TEXT, login TEXT, senha TEXT)');
-          await txn.rawInsert('INSERT INTO usuario (nome, email, login, senha) VALUES (?, ?, ?, ?)', ['Paulo Ricardo', 'paulo.pontes@ifto.edu.br', 'paulo', '123456']);
+          await txn.rawInsert('INSERT INTO usuario (nome, email, login, senha, avatar) VALUES (?, ?, ?, ?, ?)', ['Paulo Ricardo', 'paulo.pontes@ifto.edu.br', 'paulo', '123456', 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg']);
         });
       },
       version: 1,
@@ -98,5 +98,23 @@ class Banco{
     }else {
       return null;
     }
+  }
+
+  Future<List<Usuario>> listarUsuarios() async{
+    final db = await database;
+    final List<Map<String, dynamic>> map = await db!.query("usuario");
+
+    return List.generate(map.length,
+      (index) {
+        return Usuario(
+          id: map[index]['id'],
+          nome: map[index]['nome'],
+          email: map[index]['email'],
+          login: map[index]['login'],
+          senha: map[index]['senha'],
+          avatar: map[index]['avatar'],
+        );
+      }
+    );
   }
 }

@@ -23,7 +23,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
               child: Column(
                 children: [
                   CircleAvatar(
-                    child: Icon(Icons.account_circle),
+                    backgroundImage: NetworkImage(usr.avatar!),
                   ),
                   ListTile(
                     title: Text(usr.nome!),

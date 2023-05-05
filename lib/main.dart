@@ -28,7 +28,7 @@ void main() async{
       routes: {
         "/" : (context) => TelaLogin(bd: bd,),
         "/home" : (context) => Home(bd: bd,),
-        "/telausuario" : (context) => TelaUsuario(),
+        "/telausuario" : (context) => TelaUsuario(bd: bd,),
         "/telaimagem" : (context) =>TelaImagem(bd: bd,),
       },
     ),
