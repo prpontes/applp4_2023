@@ -15,7 +15,7 @@ class Banco{
       join(await getDatabasesPath(), 'bancoimagem.db'),
       onCreate: (db, version){
         return db.transaction((txn) async {
-          await txn.execute('CREATE TABLE imagem(id INTEGER PRIMARY KEY, url TEXT, titulo TEXT, descricao TEXT)');
+          await txn.execute('CREATE TABLE imagem(id INTEGER PRIMARY KEY, url TEXT, titulo TEXT, descricao TEXT, id_usuario INTEGER)');
           await txn.execute('CREATE TABLE usuario(id INTEGER PRIMARY KEY, nome TEXT, email TEXT, avatar TEXT, login TEXT, senha TEXT)');
           await txn.rawInsert('INSERT INTO usuario (nome, email, login, senha, avatar) VALUES (?, ?, ?, ?, ?)', ['Paulo Ricardo', 'paulo.pontes@ifto.edu.br', 'paulo', '123456', 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg']);
         });
@@ -30,10 +30,16 @@ class Banco{
     db!.insert("imagem", img.toMap());
   }
 
-  Future<List<Imagem>> listarImagens() async{
+  Future<void> inserirImagemUsuario(Imagem img, int id_usuario) async {
     final db = await database;
 
-    final List<Map<String, dynamic>> map = await db!.query('imagem');
+    db!.rawInsert('INSERT INTO imagem (url, titulo, descricao, id_usuario) VALUES (?, ?, ?, ?)', [img.url, img.titulo, img.descricao, id_usuario]);
+  }
+
+  Future<List<Imagem>> listarImagens(int id_usuario) async{
+    final db = await database;
+
+    final List<Map<String, dynamic>> map = await db!.query('imagem', where: 'id_usuario = ?', whereArgs: [id_usuario]);
 
     return List.generate(map.length,
         (index) {
@@ -116,5 +122,11 @@ class Banco{
         );
       }
     );
+  }
+
+  Future<void> inserirUsuario(Usuario usr) async {
+    final db = await database;
+
+    db!.insert("usuario", usr.toMap());
   }
 }

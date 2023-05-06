@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:galeria_imagem/provider_usuario.dart';
+import 'package:provider/provider.dart';
 import 'banco.dart';
 import 'drawer.dart';
 import 'imagem.dart';
@@ -27,15 +29,11 @@ class _TelaImagemState extends State<TelaImagem> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    iniBanco();
-  }
-
-  Future<void> iniBanco() async {
     carregarImagens();
   }
 
   Future<void> carregarImagens() async {
-    limg = await widget.bd!.listarImagens();
+    limg = await widget.bd!.listarImagens(Provider.of<UsuarioProvider>(context, listen: false).usr!.id!);
     setState(() {
       limg;
     });
@@ -167,7 +165,7 @@ class _TelaImagemState extends State<TelaImagem> {
                     ElevatedButton(
                         onPressed: () async{
                           if(_formKey.currentState!.validate()){
-                            await widget.bd!.inserirImagem(
+                            await widget.bd!.inserirImagemUsuario(
                                 Imagem(
                                     url:
                                     _controllerUrl.text,
@@ -175,7 +173,8 @@ class _TelaImagemState extends State<TelaImagem> {
                                     _controllerTitulo.text,
                                     descricao:
                                     _controllerDescricao.text
-                                )
+                                ),
+                                Provider.of<UsuarioProvider>(context, listen: false).usr!.id!
                             );
                             await carregarImagens();
                             _controllerUrl.clear();
