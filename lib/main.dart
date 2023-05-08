@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:galeria_imagem/provider_imagem.dart';
 import 'package:galeria_imagem/provider_usuario.dart';
 import 'package:galeria_imagem/tela_imagem.dart';
 import 'package:galeria_imagem/tela_login.dart';
@@ -20,6 +21,7 @@ void main() async{
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => UsuarioProvider()),
+      ChangeNotifierProvider(create: (_) => ImagemProvider()),
     ],
     child: MaterialApp(
       //home: TelaLogin(bd: bd,),

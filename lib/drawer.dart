@@ -36,13 +36,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
             onTap: (){
               Navigator.pushReplacementNamed(context, "/home");
             },
-            leading: Icon(Icons.home),
-            title: Text("Início"),
-          ),
-          ListTile(
-            onTap: (){
-              Navigator.pushReplacementNamed(context, "/telaimagem");
-            },
             leading: Icon(Icons.image),
             title: Text("Galeria"),
           ),

@@ -34,6 +34,9 @@ class _HomeState extends State<Home> {
     telas = [telaImagem, telaListagemImagens, telaGridImagens];
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Imagem"),
+      ),
       drawer: DrawerMenu(),
       body: Center(
         child: telas!.elementAt(barraNavegacaoIndex),

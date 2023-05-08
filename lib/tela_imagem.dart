@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:galeria_imagem/provider_imagem.dart';
 import 'package:galeria_imagem/provider_usuario.dart';
 import 'package:provider/provider.dart';
 import 'banco.dart';
@@ -34,18 +35,20 @@ class _TelaImagemState extends State<TelaImagem> {
 
   Future<void> carregarImagens() async {
     limg = await widget.bd!.listarImagens(Provider.of<UsuarioProvider>(context, listen: false).usr!.id!);
+    carregarProvider();
     setState(() {
       limg;
     });
   }
 
+  void carregarProvider(){
+    Provider.of<ImagemProvider>(context, listen: false).listaImagem = limg;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Imagem"),
-      ),
-      drawer: DrawerMenu(),
+
       body: SingleChildScrollView(
         child: Column(
           children: [
