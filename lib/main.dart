@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:galeria_imagem/provider_imagem.dart';
-import 'package:galeria_imagem/provider_usuario.dart';
-import 'package:galeria_imagem/tela_imagem.dart';
-import 'package:galeria_imagem/tela_login.dart';
-import 'package:galeria_imagem/tela_usuario.dart';
+import 'provider_imagem.dart';
+import 'provider_usuario.dart';
+import 'tela_imagem.dart';
+import 'tela_login.dart';
+import 'tela_usuario.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 import 'banco.dart';
@@ -36,5 +36,3 @@ void main() async{
     ),
   ));
 }
-
-

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:galeria_imagem/usuario.dart';
+import 'usuario.dart';
 
 class UsuarioProvider extends ChangeNotifier{
 

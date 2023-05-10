@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:galeria_imagem/provider_usuario.dart';
+import 'provider_usuario.dart';
 import 'package:provider/provider.dart';
 import 'banco.dart';
 import 'usuario.dart';
@@ -29,14 +29,14 @@ class _TelaLoginState extends State<TelaLogin> {
           context: context,
           builder: (context){
             return AlertDialog(
-              title: Text("Aviso"),
-              content: Text("Usuário não encontrado!"),
+              title: const Text("Aviso"),
+              content: const Text("Usuário não encontrado!"),
               actions: [
                 TextButton(
                     onPressed: (){
                       Navigator.pop(context);
                     },
-                    child: Text("Ok")
+                    child: const Text("Ok")
                 )
               ],
             );
@@ -49,7 +49,7 @@ class _TelaLoginState extends State<TelaLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,16 +60,16 @@ class _TelaLoginState extends State<TelaLogin> {
                     TextFormField(
                       controller: controllerLogin,
                       keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Login"
                       ),
                     ),
-                    SizedBox(height: 15,),
+                    const SizedBox(height: 15,),
                     TextFormField(
                       controller: controllerSenha,
                       keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Senha"
                       ),
@@ -79,7 +79,7 @@ class _TelaLoginState extends State<TelaLogin> {
                         onPressed: (){
                           autenticar(context, controllerLogin.text, controllerSenha.text);
                         },
-                        child: Text("Ok")
+                        child: const Text("Ok")
                     )
                   ],
                 )

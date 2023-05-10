@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:galeria_imagem/usuario.dart';
+import 'usuario.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -15,7 +15,7 @@ class Banco{
       join(await getDatabasesPath(), 'bancoimagem.db'),
       onCreate: (db, version){
         return db.transaction((txn) async {
-          await txn.execute('CREATE TABLE imagem(id INTEGER PRIMARY KEY, url TEXT, titulo TEXT, descricao TEXT, id_usuario INTEGER)');
+          await txn.execute('CREATE TABLE imagem(id INTEGER PRIMARY KEY, url TEXT, titulo TEXT, descricao TEXT, favorito INTEGER DEFAULT 0, id_usuario INTEGER)');
           await txn.execute('CREATE TABLE usuario(id INTEGER PRIMARY KEY, nome TEXT, email TEXT, avatar TEXT, login TEXT, senha TEXT)');
           await txn.rawInsert('INSERT INTO usuario (nome, email, login, senha, avatar) VALUES (?, ?, ?, ?, ?)', ['Paulo Ricardo', 'paulo.pontes@ifto.edu.br', 'paulo', '123456', 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg']);
         });
@@ -40,7 +40,6 @@ class Banco{
     final db = await database;
 
     final List<Map<String, dynamic>> map = await db!.query('imagem', where: 'id_usuario = ?', whereArgs: [id_usuario]);
-
     return List.generate(map.length,
         (index) {
         return Imagem(
@@ -48,8 +47,27 @@ class Banco{
           url: map[index]['url'],
           titulo: map[index]['titulo'],
           descricao: map[index]['descricao'],
+          favorito: map[index]['favorito'],
         );
       }
+    );
+  }
+
+  Future<List<Imagem>> listarImagensFavoritos(int id_usuario) async{
+    final db = await database;
+
+    final List<Map<String, dynamic>> map = await db!.query('imagem', where: 'id_usuario = ? and favorito = ?', whereArgs: [id_usuario, 1]);
+
+    return List.generate(map.length,
+            (index) {
+          return Imagem(
+            id: map[index]['id'],
+            url: map[index]['url'],
+            titulo: map[index]['titulo'],
+            descricao: map[index]['descricao'],
+            favorito: map[index]['favorito'],
+          );
+        }
     );
   }
 

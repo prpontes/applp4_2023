@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:galeria_imagem/drawer.dart';
-import 'package:galeria_imagem/tela_grid_imagens.dart';
-import 'package:galeria_imagem/tela_imagem.dart';
-import 'package:galeria_imagem/tela_listagem_imagens.dart';
+import 'drawer.dart';
+import 'tela_favorito_imagem.dart';
+import 'tela_grid_imagens.dart';
+import 'tela_imagem.dart';
+import 'tela_listagem_imagens.dart';
 
 import 'banco.dart';
 
@@ -21,6 +22,7 @@ class _HomeState extends State<Home> {
   var telaImagem;
   var telaListagemImagens;
   var telaGridImagens;
+  var telaFavoritoImagens;
 
   List<Widget>? telas;
 
@@ -30,8 +32,9 @@ class _HomeState extends State<Home> {
     telaImagem = TelaImagem(bd: widget.bd,);
     telaListagemImagens = ListagemImagens(bd: widget.bd,);
     telaGridImagens = GridImagens();
+    telaFavoritoImagens = FavoritoImagens(bd: widget.bd,);
 
-    telas = [telaImagem, telaListagemImagens, telaGridImagens];
+    telas = [telaImagem, telaListagemImagens, telaGridImagens, telaFavoritoImagens];
 
     return Scaffold(
       appBar: AppBar(
@@ -59,8 +62,8 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "configuração",
+            icon: Icon(Icons.star),
+            label: "favorito",
             backgroundColor: Colors.blue,
           ),
         ],
