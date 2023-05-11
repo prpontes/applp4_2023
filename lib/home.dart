@@ -38,9 +38,9 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Imagem"),
+        title: const Text("Imagem"),
       ),
-      drawer: DrawerMenu(),
+      drawer: const DrawerMenu(),
       body: Center(
         child: telas!.elementAt(barraNavegacaoIndex),
       ),
