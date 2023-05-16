@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:galeria_imagem/provider_imagem.dart';
-import 'package:galeria_imagem/provider_usuario.dart';
+import 'provider_imagem.dart';
+import 'provider_usuario.dart';
 import 'package:provider/provider.dart';
 import 'banco.dart';
-import 'drawer.dart';
 import 'imagem.dart';
 import 'imagem_detalhe.dart';
 
@@ -21,9 +20,9 @@ class _TelaImagemState extends State<TelaImagem> {
   List<Imagem> limg = [];
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _controllerUrl = TextEditingController();
-  TextEditingController _controllerTitulo = TextEditingController();
-  TextEditingController _controllerDescricao = TextEditingController();
+  final TextEditingController _controllerUrl = TextEditingController();
+  final TextEditingController _controllerTitulo = TextEditingController();
+  final TextEditingController _controllerDescricao = TextEditingController();
   int cont = 0;
 
   @override
@@ -47,8 +46,8 @@ class _TelaImagemState extends State<TelaImagem> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
 
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -65,10 +64,10 @@ class _TelaImagemState extends State<TelaImagem> {
                   }
                   carregarImagens();
                 },
-                child: limg.isEmpty ? Text("carregando") : Image.network(limg[cont].url)
+                child: limg.isEmpty ? const Text("carregando") : Image.network(limg[cont].url)
             ),
-            limg.isEmpty ? Text("carregando") : Text(limg[cont].titulo,
-              style: TextStyle(
+            limg.isEmpty ? const Text("carregando") : Text(limg[cont].titulo,
+              style: const TextStyle(
                   fontSize: 18
               ),
             ),
@@ -83,9 +82,9 @@ class _TelaImagemState extends State<TelaImagem> {
                         }
                       });
                     },
-                    child: Text("<<")
+                    child: const Text("<<")
                 ),
-                SizedBox(width: 25,),
+                const SizedBox(width: 25,),
                 ElevatedButton(
                     onPressed: (){
                       setState((){
@@ -94,7 +93,7 @@ class _TelaImagemState extends State<TelaImagem> {
                         }
                       });
                     },
-                    child: Text(">>")
+                    child: const Text(">>")
                 ),
               ],
             )
@@ -107,7 +106,7 @@ class _TelaImagemState extends State<TelaImagem> {
               context: context,
               builder: (contexto){
                 return AlertDialog(
-                  title: Text("Inserir nova imagem"),
+                  title: const Text("Inserir nova imagem"),
                   content: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -119,7 +118,7 @@ class _TelaImagemState extends State<TelaImagem> {
                               TextFormField(
                                 controller: _controllerUrl,
                                 keyboardType: TextInputType.url,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Insira uma url",
                                     labelText: "Url"
                                 ),
@@ -133,7 +132,7 @@ class _TelaImagemState extends State<TelaImagem> {
                               TextFormField(
                                 controller: _controllerTitulo,
                                 keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Insira um título",
                                     labelText: "Título"
                                 ),
@@ -147,7 +146,7 @@ class _TelaImagemState extends State<TelaImagem> {
                               TextFormField(
                                 controller: _controllerDescricao,
                                 keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Insira uma descrição",
                                     labelText: "Descrição"
                                 ),
@@ -187,13 +186,13 @@ class _TelaImagemState extends State<TelaImagem> {
                             Navigator.pop(context);
                           }
                         },
-                        child: Text("Salvar")
+                        child: const Text("Salvar")
                     )
                   ],
                 );
               });
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

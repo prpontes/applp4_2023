@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:galeria_imagem/banco.dart';
-import 'package:galeria_imagem/drawer.dart';
-import 'package:galeria_imagem/usuario.dart';
+import 'banco.dart';
+import 'drawer.dart';
+import 'usuario.dart';
 
 class TelaUsuario extends StatefulWidget {
 
@@ -142,7 +142,7 @@ class _TelaUsuarioState extends State<TelaUsuario> {
                       Navigator.pop(context);
                     }
                   },
-                  child: Text("Salvar")
+                  child: const Text("Salvar")
               )
             ],
           );
@@ -162,9 +162,9 @@ class _TelaUsuarioState extends State<TelaUsuario> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Usuário"),
+        title: const Text("Usuário"),
       ),
-      drawer: DrawerMenu(),
+      drawer: const DrawerMenu(),
       body: ListView.builder(
           itemCount: listaUser.length,
           itemBuilder: (context, index){
@@ -198,7 +198,7 @@ class _TelaUsuarioState extends State<TelaUsuario> {
         onPressed: (){
           adicionarNovoUsuario();
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:galeria_imagem/imagem.dart';
-import 'package:galeria_imagem/provider_imagem.dart';
+import 'imagem.dart';
+import 'provider_imagem.dart';
 import 'package:provider/provider.dart';
 
 class GridImagens extends StatefulWidget {

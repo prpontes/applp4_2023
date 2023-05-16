@@ -36,15 +36,15 @@ class _DrawerMenuState extends State<DrawerMenu> {
             onTap: (){
               Navigator.pushReplacementNamed(context, "/home");
             },
-            leading: Icon(Icons.image),
-            title: Text("Galeria"),
+            leading: const Icon(Icons.image),
+            title: const Text("Galeria"),
           ),
           ListTile(
             onTap: (){
               Navigator.pushReplacementNamed(context, "/telausuario");
             },
-            leading: Icon(Icons.account_box),
-            title: Text("Usuário"),
+            leading: const Icon(Icons.account_box),
+            title: const Text("Usuário"),
           ),
           const Divider(
             color: Colors.black,
@@ -53,8 +53,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
             onTap: (){
               Navigator.pushReplacementNamed(context, "/");
             },
-            leading: Icon(Icons.logout),
-            title: Text("Sair"),
+            leading: const Icon(Icons.logout),
+            title: const Text("Sair"),
           ),
         ],
       ),

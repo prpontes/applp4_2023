@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:galeria_imagem/provider_usuario.dart';
+import 'provider_usuario.dart';
 import 'package:provider/provider.dart';
 import 'banco.dart';
 import 'imagem.dart';

@@ -30,7 +30,7 @@ class _ImagemDetalheState extends State<ImagemDetalhe> {
         context: context,
         builder: (context){
           return AlertDialog(
-            title: Text("Editar imagem"),
+            title: const Text("Editar imagem"),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -42,7 +42,7 @@ class _ImagemDetalheState extends State<ImagemDetalhe> {
                         TextFormField(
                           controller: _controllerUrl,
                           keyboardType: TextInputType.url,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Insira uma url",
                               labelText: "Url"
                           ),
@@ -56,7 +56,7 @@ class _ImagemDetalheState extends State<ImagemDetalhe> {
                         TextFormField(
                           controller: _controllerTitulo,
                           keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Insira um título",
                               labelText: "Título"
                           ),
@@ -70,7 +70,7 @@ class _ImagemDetalheState extends State<ImagemDetalhe> {
                         TextFormField(
                           controller: _controllerDescricao,
                           keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Insira uma descrição",
                               labelText: "Descrição"
                           ),
@@ -106,13 +106,13 @@ class _ImagemDetalheState extends State<ImagemDetalhe> {
                       widget.img;
                     });
                   },
-                  child: Text("Editar")
+                  child: const Text("Editar")
               ),
               ElevatedButton(
                   onPressed: (){
                     Navigator.pop(context);
                   },
-                  child: Text("Cancelar")
+                  child: const Text("Cancelar")
               ),
             ],
           );
@@ -124,19 +124,19 @@ class _ImagemDetalheState extends State<ImagemDetalhe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detalhe da imagem"),
+        title: const Text("Detalhe da imagem"),
         actions: [
           IconButton(
               onPressed: (){
                 formEditarImagem(context);
               },
-              icon: Icon(Icons.edit)
+              icon: const Icon(Icons.edit)
           ),
           IconButton(
               onPressed: (){
                 Navigator.pop(context, widget.img!.id);
               },
-              icon: Icon(Icons.delete)
+              icon: const Icon(Icons.delete)
           )
         ],
       ),
