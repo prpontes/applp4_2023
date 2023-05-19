@@ -10,7 +10,6 @@ class Banco{
   Future<Database>? database;
 
   Future<void> criarBanco() async{
-    WidgetsFlutterBinding.ensureInitialized();
     database = openDatabase(
       join(await getDatabasesPath(), 'bancoimagem.db'),
       onCreate: (db, version){

@@ -3,6 +3,7 @@ import 'provider_usuario.dart';
 import 'package:provider/provider.dart';
 import 'banco.dart';
 import 'usuario.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TelaLogin extends StatefulWidget {
 
@@ -18,6 +19,42 @@ class _TelaLoginState extends State<TelaLogin> {
 
   final TextEditingController controllerLogin = TextEditingController();
   final TextEditingController controllerSenha = TextEditingController();
+
+  void autenticarFirebase(context, email, senha) async {
+    try {
+      final credencial = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: senha
+      );
+      var usr = Usuario(nome: credencial.user!.displayName, email: credencial.user!.email, login: credencial.user!.displayName, senha: senha);
+      Provider.of<UsuarioProvider>(context, listen: false).usuario = usr;
+      Navigator.pushReplacementNamed(context, "/home");
+    } on FirebaseAuthException catch (e) {
+      var str;
+      if (e.code == 'user-not-found') {
+        str = 'Nenhum usuário encontrado com esse e-mail.';
+      } else if (e.code == 'wrong-password') {
+        str = 'Senha errada para esse usuário.';
+      }
+      showDialog(
+          context: context,
+          builder: (context){
+            return AlertDialog(
+              title: const Text("Aviso"),
+              content: Text(str),
+              actions: [
+                TextButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Ok")
+                )
+              ],
+            );
+          }
+      );
+    }
+  }
 
   void autenticar(context, login, senha) async{
     Usuario? usr = await widget.bd!.autenticacao(login, senha);
