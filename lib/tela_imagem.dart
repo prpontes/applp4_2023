@@ -174,7 +174,8 @@ class _TelaImagemState extends State<TelaImagem> {
                                     titulo:
                                     _controllerTitulo.text,
                                     descricao:
-                                    _controllerDescricao.text
+                                    _controllerDescricao.text,
+                                    favorito: 0
                                 ),
                                 Provider.of<UsuarioProvider>(context, listen: false).usr!.id!
                             );
