@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'usuario.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
