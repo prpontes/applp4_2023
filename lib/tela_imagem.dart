@@ -61,6 +61,9 @@ class _TelaImagemState extends State<TelaImagem> {
                   );
                   if(id != null){
                     widget.bd!.removerImagem(id);
+                    if(cont > 0) {
+                      cont = cont - 1;
+                    }
                   }
                   carregarImagens();
                 },
